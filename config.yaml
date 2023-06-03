@@ -1,1 +1,7 @@
-model: MLP
+path:
+  data: 'data'
+
+input_data: 'output_df.csv'
+
+model: 'MLP'
+
