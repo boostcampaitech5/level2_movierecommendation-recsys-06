@@ -1,1 +1,1 @@
-import RMSELoss
+from rmse import RMSELoss

@@ -1,1 +1,1 @@
-import MultiLayerPerceptron
+from model_mlp import *

@@ -8,7 +8,7 @@ class RMSELoss(nn.Module):
         super(RMSELoss, self).__init__()
         self.eps = 1e-6
 
-    def forward(self, x, y):
+    def forward(self, y, y_hat):
         criterion = MSELoss()
-        loss = torch.sqrt(criterion(x, y) + self.eps)
+        loss = torch.sqrt(criterion(y, y_hat) + self.eps)
         return loss
