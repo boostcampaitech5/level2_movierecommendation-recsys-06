@@ -1,7 +1,13 @@
 path:
   data: 'data'
 
-input_data: 'output_df.csv'
+input_data: ['input_data.pkl', 'user_data.pkl', 'item_data.pkl']
 
-model: 'MLP'
+model_name: 'MLP'
 
+batch_size: 1
+
+mlp:
+  input_dim: 4
+  hidden_dims: [64, 16]
+  output_dim: 1
