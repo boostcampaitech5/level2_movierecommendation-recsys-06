@@ -18,28 +18,28 @@ def get_settings() -> dict:
     return setting_dict
 
 
-def get_raw_data(settings) -> pd.DataFrame:
+def get_raw_data(settings) -> dict:
     """
     Gets raw data from pickle file.
 
     Parameters:
         settings(dict): Dictionary containing settings
     Returns:
-        raw_user_df(pd.DataFrame): Raw user data
-        raw_item_df(pd.DataFrame): Raw item data
-        raw_interaction_df(pd.DataFrame): Raw interaction data
+        raw_data_dict: Raw data in dictionary
     """
 
     data_path: str = settings["path"]["data"]
     df_path: str = settings["input_data"]
 
-    raw_interaction_df: pd.DataFrame = pd.read_pickle(
+    raw_data_dict = dict()
+
+    raw_data_dict['interaction']: pd.DataFrame = pd.read_pickle(
         os.path.join(data_path, df_path[0])
     )
-    raw_user_df: pd.DataFrame = pd.read_pickle(os.path.join(data_path, df_path[1]))
-    raw_item_df: pd.DataFrame = pd.read_pickle(os.path.join(data_path, df_path[2]))
+    raw_data_dict['user']: pd.DataFrame = pd.read_pickle(os.path.join(data_path, df_path[1]))
+    raw_data_dict['item']: pd.DataFrame = pd.read_pickle(os.path.join(data_path, df_path[2]))
 
-    return raw_user_df, raw_item_df, raw_interaction_df
+    return raw_data_dict
 
 
 def create_data(settings) -> tuple:
