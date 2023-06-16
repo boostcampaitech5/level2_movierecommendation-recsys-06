@@ -9,7 +9,7 @@ def get_metric_score(
     Args:
         answer (np.ndarray): Movies that were actually seen by batch users
         pred_list (np.ndarray): movies recommended to users on a batch
-        topk (list, optional): Array of the number of movies to recommend  Defaults to [5, 10].
+        topk (list, optional): Array of the number of movies to recommend  defaults to [5, 10].
 
     Returns:
         tuple: Recall list and NDCG list for k in topks
@@ -38,8 +38,9 @@ def recall_at_k(actual: np.ndarray, predicted: np.ndarray, topk: int) -> float:
     for i in range(num_users):
         act_set = set(actual[i])
         pred_set = set(predicted[i][:topk])
+        k = min(len(act_set), topk)
         if len(act_set) != 0:
-            sum_recall += len(act_set & pred_set) / float(len(act_set))
+            sum_recall += len(act_set & pred_set) / float(k)
             true_users += 1
     return sum_recall / true_users
 
