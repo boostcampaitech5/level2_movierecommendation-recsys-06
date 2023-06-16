@@ -2,21 +2,42 @@ from torch.utils.data import Dataset
 
 
 class CustomDataset(Dataset):
-    def __init__(self, raw_input, raw_user, raw_item):
-        self.raw_input = raw_input
-        self.raw_user = raw_user
-        self.raw_item = raw_item
+    """
+    Creates dataset from input_data
+
+    Index is the user number. All items are returned with the interaction data of the user.
+    If a user didn't interact with the item then the item's value for the interaction will be None.
+    """
+
+    def __init__(self, input_interaction, input_user, input_item):
+        self.input_interaction = input_interaction
+        self.input_user = input_user
+        self.input_item = input_item
 
     def __getitem__(self, index):
-        user_id = self.raw_user['user_id'][index]
-        user_df = self.raw_user[self.raw_user['user_id'] == user_id]
+        # Get user ID from index and the user interaction data
+        user_id = self.input_user["user_id"][index]
+        user_df = self.input_user[self.input_user["user_id"] == user_id]
 
-        output_df = self.raw_item.merge(self.raw_input[self.raw_input['user_id'] == user_id], how='left', on='item_id')
+        # Merge all item data to the interaction data
+        # The items without interaction data will be filled with None or pd.nan
+        output_df = self.input_item.merge(
+            self.input_interaction[self.input_interaction["user_id"] == user_id],
+            how="left",
+            on="item_id",
+        )
 
-        user_data = {col: val for val, col in zip(user_df.values.squeeze(), user_df.columns)}
-        output_data = [{col: val for val, col in zip(item, output_df.columns)} for item in output_df.values]
+        # Get dictionary of all the values
+        user_data = {
+            col: val for val, col in zip(user_df.values.squeeze(), user_df.columns)
+        }
+        output_data = [
+            {col: val for val, col in zip(item, output_df.columns)}
+            for item in output_df.values
+        ]
 
         return user_data, output_data
 
     def __len__(self):
-        return len(self.raw_user)
+        # The length of the index can't be equal to or greater than the number of users
+        return len(self.input_user)

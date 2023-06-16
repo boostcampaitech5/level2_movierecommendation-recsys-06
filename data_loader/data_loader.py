@@ -12,6 +12,6 @@ def get_dataloader(dataset, settings: dict):
         dataloader(DataLoader): dataloader
     """
 
-    dataloader = DataLoader(dataset, batch_size=settings['batch_size'], shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=settings["batch_size"], shuffle=True)
 
     return dataloader
