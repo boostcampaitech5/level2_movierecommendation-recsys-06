@@ -2,7 +2,7 @@ from recbole.quick_start import run_recbole
 from preprocess import preprocess
 from util import load_setting, merge_yaml, load_data
 
-PATH = "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/settings.yaml"
+PATH = "./settings.yaml"
 
 
 def main():

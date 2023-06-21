@@ -6,12 +6,12 @@ import os
 from util import load_setting
 
 
-PATH = "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/settings.yaml"
+PATH = "./settings.yaml"
 
 
 def main():
     setting = load_setting(PATH)
-    config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
+    config, model, dataset, _, _, test_data = load_data_and_model(
         setting["path"]["save_model"]
     )
     # device 설정
