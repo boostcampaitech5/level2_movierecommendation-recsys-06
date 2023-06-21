@@ -1,0 +1,37 @@
+ITEM_ID_FIELD: item_id
+ITEM_LIST_LENGTH_FIELE: item_length
+LIST_SUFFIX: _list
+MAX_ITEM_LIST_LENGTH: 50
+RATING_FIELD: rating
+TIME_FIELD: timestamp
+User_ID_FIELD: user_id
+dropout_prob: 0.3
+embedding_size: 64
+epochs: 50
+eval_args:
+  group_by: user
+  mode: full
+  order: TO
+  split:
+    LS: valid_and_test
+eval_batch_size: 128
+field_separator: "\t"
+hidden_size: 256
+load_col:
+  inter:
+  - user_id
+  - item_id
+  - timestamp
+loss_type: CE
+metrics:
+- Recall
+- MRR
+- NDCG
+- Hit
+- Precision
+num_layers: 1
+seq_separator: ' '
+topk: 10
+train_batch_size: 128
+train_neg_sample_args: null
+valid_metric: Recall@10

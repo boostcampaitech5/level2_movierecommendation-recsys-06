@@ -1,0 +1,19 @@
+# Atomic File Format
+field_separator: "\t"
+seq_separator: " "
+
+# Common Features
+User_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+TIME_FIELD: timestamp
+
+# Selectively Loading
+load_col:
+  inter: [user_id, item_id, timestamp]
+
+ITEM_LIST_LENGTH_FIELE: item_length
+LIST_SUFFIX: _list
+MAX_ITEM_LIST_LENGTH: 50
+
+

@@ -1,0 +1,18 @@
+path:
+  data: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/data"
+
+  data_property: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/properties/movie_len.yaml"
+
+  model_property: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/model/GRU4Rec.yaml"
+
+  train_valid_property: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/train_eval.yaml" 
+
+  save_data: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/recbole_data"
+
+  save_yaml: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/test/test.yaml"
+
+  save_model: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/saved/GRU4Rec-Jun-20-2023_10-56-22.pth"
+
+  submission: "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/submission"
+model: "GRURecF"
+
