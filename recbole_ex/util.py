@@ -15,13 +15,19 @@ def load_setting(path):
     return setting
 
 
+# def load_data(data_path):
+#     data = dict()
+#     data_name_list = ["input_data", "item_data", "user_data"]
+#     for data_name in data_name_list:
+#         data[data_name] = pd.read_pickle(os.path.join(data_path, data_name + ".pkl"))
+#     return data
+
 def load_data(data_path):
     data = dict()
-    data_name_list = ["input_data", "item_data", "user_data"]
+    data_name_list = ["inter", "item", "user"]
     for data_name in data_name_list:
-        data[data_name] = pd.read_pickle(os.path.join(data_path, data_name + ".pkl"))
+        data[data_name] = pd.read_csv(os.path.join(data_path,data_name+"_df."+data_name), sep='\t')
     return data
-
 
 def merge_yaml(model_property_path, data_property_path, train_eval_path, save_path):
     with open(model_property_path) as f:

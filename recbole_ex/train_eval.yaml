@@ -1,7 +1,7 @@
 # Training and evaluation config
-epochs: 50
-train_batch_size: 128
-eval_batch_size: 128
+epochs: 1
+train_batch_size: 4096
+eval_batch_size: 4096
 train_neg_sample_args: ~
 eval_args:
     group_by: user

@@ -1,0 +1,12 @@
+# Training and evaluation config
+epochs: 100
+train_batch_size: 64
+eval_batch_size: 64
+eval_args:
+  split: {'LS': 'valid_and_test'}
+  order: TO
+  group_by: user
+  mode: uni50
+metrics: ['Recall', 'MRR', 'NDCG', 'Hit', 'Precision']
+topk: 10
+valid_metric: Recall@10

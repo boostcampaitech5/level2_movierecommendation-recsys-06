@@ -11,21 +11,31 @@ def load_setting(path):
 
 def load_data(data_path):
     data = dict()
-    data_name_list = ["input_data", "item_data", "user_data"]
+    data_name_list = ["inter", "item", "user"]
     for data_name in data_name_list:
-        data[data_name] = pd.read_pickle(os.path.join(data_path,data_name+".pkl"))
+        data[data_name] = pd.read_csv(os.path.join(data_path,data_name+"_df."+data_name), sep='\t')
     return data
 
 def preprocess(data:dict, save_path:str, is_saving:bool=False):
     # input data
-    data = data["input_data"]
-    data = data[["user_id", "item_id", "unix_time"]].rename(columns = {
+    data_inter = data["input_data"]
+    data_inter = data_inter[["user_id", "item_id", "unix_time"]].rename(columns = {
         "user_id": "user_id:token", "item_id": "item_id:token", "unix_time":"timestamp:float"
     })
     if is_saving:
         if not os.path.isdir(save_path):
             os.mkdir(save_path)
-        data.to_csv(os.path.join(save_path,'recbole.inter'), index=False, sep='\t')
+        data_inter.to_csv(os.path.join(save_path,'recbole.inter'), index=False, sep='\t')
+    
+    # item
+    data_item = data["item_data"]
+    
+    
+    return 0
+    
+    
+    # user
+    
         
     
     return data
@@ -47,16 +57,18 @@ def merge_yaml(model_property_path, data_property_path, train_eval_path, save_pa
         yaml.dump(data_yaml, f)
 
 if __name__ == "__main__":
-    path = "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole/settings.yaml"
+    path = "/opt/ml/movie_rec_project/level2_movierecommendation-recsys-06/recbole_ex/settings.yaml"
     
     setting = load_setting(path)
     
-    merge_yaml(setting["path"]["model_property"],
-               setting["path"]["data_property"],
-               setting["path"]["train_valid_property"],
-               setting["path"]["save_yaml"])
-    
     data = load_data(setting["path"]["data"])
+    
+    for key in data.keys():
+        print(key)
+        print(data[key].head(5))
+    
+    exit()
+     
     
     data = preprocess(data, setting["path"]["save_data"], True)
     

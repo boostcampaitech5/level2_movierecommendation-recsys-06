@@ -6,11 +6,17 @@ seq_separator: " "
 User_ID_FIELD: user_id
 ITEM_ID_FIELD: item_id
 RATING_FIELD: rating
-TIME_FIELD: timestamp
+TIME_FIELD: unix_time
+
+train_neg_sample_args:
+  uniform: 1
+
 
 # Selectively Loading
 load_col:
-  inter: [user_id, item_id, timestamp]
+  inter: [user_id, item_id, unix_time, rating]
+  item: [item_id, user_watched_num, item_title, item_year]
+  user: [user_id, item_watched_num]
 
 ITEM_LIST_LENGTH_FIELE: item_length
 LIST_SUFFIX: _list

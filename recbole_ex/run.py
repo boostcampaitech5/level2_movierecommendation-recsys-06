@@ -18,13 +18,13 @@ def main():
     )
 
     # load data
-    data = load_data(setting["path"]["data"])
+    # data = load_data(setting["path"]["data"])
 
     # preprocess
-    data = preprocess(data, setting["path"]["save_data"], False)
+    # data = preprocess(data, setting["path"]["save_data"], False)
 
     # Get logger and config
-    run_recbole(model="GRU4Rec", dataset="recbole_data", config_dict=data_yaml)
+    run_recbole(model="DeepFM", dataset="datav4", config_dict=data_yaml)
 
 
 if __name__ == "__main__":
