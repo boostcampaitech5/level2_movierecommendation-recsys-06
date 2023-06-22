@@ -3,11 +3,11 @@ path:
 
   data_property: "./properties/movie_len.yaml"
 
-  model_property: "./model/GRU4Rec.yaml"
+  model_property: "./model/NCL.yaml"
 
   train_valid_property: "./train_eval.yaml" 
 
-  save_data: "./dataset/recbole_data"
+  save_data: "./dataset/datav4"
 
   save_yaml: "./test/test.yaml"
 

@@ -1,8 +1,9 @@
 # Training and evaluation config
 epochs: 50
-train_batch_size: 128
-eval_batch_size: 128
-train_neg_sample_args: ~
+train_batch_size: 2048
+eval_batch_size: 2048
+train_neg_sample_args:
+    distribution: 'uniform'
 eval_args:
     group_by: user
     order: TO
