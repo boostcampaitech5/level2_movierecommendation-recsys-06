@@ -85,7 +85,7 @@ def main():
         
         # print(pred_list)
         # print(user_list)
-        exit()        
+        # exit()        
 
     result = []
     for user, pred in zip(user_list, pred_list):
