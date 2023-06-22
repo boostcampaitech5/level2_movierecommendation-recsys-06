@@ -27,8 +27,8 @@ def main():
     matrix = dataset.inter_matrix(form="csr")
 
     # user id, predict item id 저장 변수
-    pred_list = []
-    user_list = []
+    pred_list = None
+    user_list = None
 
     model.eval()
     
@@ -76,12 +76,12 @@ def main():
 
         batch_pred_list = ind[np.arange(len(rating_pred))[:, None], arr_ind_argsort]
         # 예측값 저장
-        if not pred_list:
+        if pred_list is None:
             pred_list = batch_pred_list
-            user_list.append(batch_user_index[0])
+            user_list = batch_user_index[:1]
         else:
             pred_list = np.append(pred_list, batch_pred_list, axis=0)
-            user_list = np.append(user_list, batch_user_index[0], axis=0)
+            user_list = np.append(user_list, batch_user_index[:1], axis=0)
         
         # print(pred_list)
         # print(user_list)
