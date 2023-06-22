@@ -3,7 +3,7 @@ path:
 
   data_property: "./properties/movie_len.yaml"
 
-  model_property: "./model/NCL.yaml"
+  model_property: "./model/CORE.yaml"
 
   train_valid_property: "./train_eval.yaml" 
 
@@ -11,9 +11,7 @@ path:
 
   save_yaml: "./test/test.yaml"
 
-  save_model: "./saved/GRU4Rec-Jun-21-2023_02-27-19.pth"
+  save_model: "./saved/CORE-Jun-22-2023_06-12-21.pth"
 
   submission: "./submission"
-
-model: "GRU4Rec"
 

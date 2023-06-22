@@ -24,7 +24,7 @@ def main():
     # data = preprocess(data, setting["path"]["save_data"], False)
 
     # Get logger and config
-    run_recbole(model="NCL", dataset="datav4", config_dict=data_yaml)
+    run_recbole(model="CORE", dataset="datav4", config_dict=data_yaml)
 
 
 if __name__ == "__main__":

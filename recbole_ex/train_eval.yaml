@@ -2,8 +2,7 @@
 epochs: 50
 train_batch_size: 2048
 eval_batch_size: 2048
-train_neg_sample_args:
-    distribution: 'uniform'
+train_neg_sample_args: ~
 eval_args:
     group_by: user
     order: TO
