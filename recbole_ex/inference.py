@@ -94,10 +94,10 @@ def main():
             pred_list = np.append(pred_list, batch_pred_list, axis=0)
             user_list = np.append(user_list, batch_user, axis=0)
         
-        print(pred_list)
-        print(user_list)
-        if i ==3:
-            exit()        
+        # print(pred_list)
+        # print(user_list)
+        # if i ==3:
+        #     exit()        
 
     result = []
     for user, pred in zip(user_list, pred_list):
