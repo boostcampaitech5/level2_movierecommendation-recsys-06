@@ -16,6 +16,7 @@ def main():
     config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
         setting["path"]["save_model"]
     )
+    neg_sample_number = config["eval_neg_sample_args"]["sample_num"]
     
     # device 설정
     device = config.final_config_dict["device"]
@@ -37,9 +38,14 @@ def main():
     for data in test_data:
         interaction = data[0].to(device)
         
+        
         try:
             score = model.full_sort_predict(interaction)
         except NotImplementedError:
+            batch_user = interaction["user_id"].cpu().numpy()
+            # print(f"length of batch_user : {len(batch_user)}")
+            batch_user = batch_user[0::neg_sample_number+1]
+            # print(batch_user)
             input_inter = interaction
             len_input_inter = len(interaction)
             input_inter = input_inter.repeat(dataset.item_num)
@@ -62,12 +68,17 @@ def main():
         # print(f"score = {score}")
         # print(f"score.shape = {score.shape}")
         
+        # print(f"batch user = {interaction['user_id'].cpu().numpy()}")
 
         rating_pred = score.cpu().data.numpy().copy()
         batch_user_index = interaction["user_id"].cpu().numpy()
         rating_pred[matrix[batch_user_index].toarray() > 0] = 0
         if temp:
-            rating_pred = rating_pred[0].reshape(-1,len(item_id2token))
+            # print(f'rating_pred = {rating_pred}\n rating_pred_shape : {rating_pred.shape}')
+            rating_pred = rating_pred[0::neg_sample_number+1]
+            # print("변환후")
+            # print(f'rating_pred = {rating_pred}\n rating_pred_shape : {rating_pred.shape}')
+            
         ind = np.argpartition(rating_pred, -10)[:, -10:]
 
         arr_ind = rating_pred[np.arange(len(rating_pred))[:, None], ind]
@@ -78,14 +89,15 @@ def main():
         # 예측값 저장
         if pred_list is None:
             pred_list = batch_pred_list
-            user_list = batch_user_index[:1]
+            user_list = batch_user
         else:
             pred_list = np.append(pred_list, batch_pred_list, axis=0)
-            user_list = np.append(user_list, batch_user_index[:1], axis=0)
+            user_list = np.append(user_list, batch_user, axis=0)
         
-        # print(pred_list)
-        # print(user_list)
-        # exit()        
+        print(pred_list)
+        print(user_list)
+        if i ==3:
+            exit()        
 
     result = []
     for user, pred in zip(user_list, pred_list):
@@ -96,7 +108,7 @@ def main():
     dataframe = pd.DataFrame(result, columns=["user", "item"])
     dataframe.sort_values(by="user", inplace=True)
     dataframe.to_csv(
-        os.path.join(setting["path"]["submission"], "submission_deepfm.csv"), index=False
+        os.path.join(setting["path"]["submission"], "submission_deepfm_dv6.csv"), index=False
     )
     print("inference done!")
 
